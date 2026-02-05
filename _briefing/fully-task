@@ -1,0 +1,2292 @@
+Perfekt! Ich hab mir alle Dokumente durchgelesen. Jetzt erstelle ich dir eine **vollständige Projektplanung** für die NFCwear Website mit allen Elementen, die reinmüssen. Basierend auf dem Briefing, Noahs Voice Message und den zusätzlichen Features.
+
+# **NFCwear Website - Vollständige Projektplanung**
+
+## **📋 PROJEKT ÜBERSICHT**
+
+**Projekt:** NFCwear by Severmore - Wearable SaaS Plattform  
+**Ziel:** B2B SaaS-Plattform für NFC-fähige Corporate Fashion  
+**Tech Stack:** Lovable.dev (Frontend), Supabase (Backend/Auth/DB), NTAG424 DNA Chips  
+**Domain-Struktur:** 
+- `nfc.severmore.de` (Hauptplattform)
+- `admin.nfc.severmore.de` (Admin Dashboard)
+
+***
+
+## **🎯 PHASE 1: LANDING PAGE (Marketing Frontend)**
+
+### **1.1 Hero Section**
+```
+Elemente:
+- Headline: "Don't just wear your brand. Connect it."
+- Subline: "One Hoodie. Infinite Modes. Managed in the Cloud."
+- Premium Hoodie Mockup mit glow effect am NFC-Tag (Handgelenk)
+- CTA Button: "Jetzt Demo buchen" / "Loslegen"
+- Video-Embed (optional): Produkt-Demo-Video
+```
+
+**Design-Vibe:**
+- Linear/Vercel/Raycast Aesthetic
+- Farben: Weiß, Stark White, Electric Blue/Yellow Akzente
+- Typography: Inter, Geist, Clash Display
+- Premium, Fast, Futuristic (NICHT playful)
+
+***
+
+### **1.2 Features/Use Cases Section**
+
+**3 Modi mit Icons & Beschreibungen:**
+
+#### **A) Corporate Mode** 🏢
+```
+Icon: Briefcase/LinkedIn
+Headline: "Vom Hoodie zum Lead-Generator"
+Features:
+- Digitale Visitenkarte (vCard)
+- Two-Way Lead Capture
+- Social Links (LinkedIn, Website)
+- Recruiting-Integration
+
+CTA: "Für Sales-Teams"
+```
+
+#### **B) Hospitality Mode** 🍽️
+```
+Icon: Restaurant/Star
+Headline: "5-Sterne ohne Papierkarte"
+Features:
+- Google Review Redirect
+- TripAdvisor Integration
+- Digitale Speisekarte (PDF/Gallery)
+- Trinkgeld-Option (Stripe)
+
+CTA: "Für Gastronomie"
+```
+
+#### **C) Campaign Mode** 🎯
+```
+Icon: Megaphone/Target
+Headline: "Marketingkampagnen am Körper"
+Features:
+- Central Override (alle Hoodies → eine URL)
+- Black Friday Landing Pages
+- Countdown & Rabattcodes
+- Event-Tracking
+
+CTA: "Für Marketing"
+```
+
+***
+
+### **1.3 ROI/Value Proposition Section**
+
+**"Warum NFCwear?"**
+
+```markdown
+📊 ROI-Beispiel (Messe):
+"Herr Müller, ein Messestand kostet Sie 50.000€. 
+Wenn Ihr Team Papierkarten nutzt, landen 60% davon im Müll. 
+Mit Severmore landet der Kontakt direkt im CRM, 
+Sie sehen live, welcher Mitarbeiter performt, 
+und der Kunde kriegt sofort Infos."
+
+Stats:
+- 60% mehr Lead-Erfassung
+- 100% messbare Conversions
+- Live Analytics für Teams
+```
+
+**USP-Grid:**
+- ✅ Hohes ROI durch messbare Leads
+- ✅ SaaS-Ökosystem (kein Vendor-Lock)
+- ✅ DSGVO-konform (Server in Frankfurt)
+- ✅ NTAG424 DNA Security (Klonschutz)
+
+***
+
+### **1.4 Tech Highlights Section**
+
+```
+Headline: "Enterprise Security meets Consumer Simplicity"
+
+Features:
+- NTAG424 DNA Chip (SUN Authentication)
+- Cloud Dashboard (Self-Service)
+- Real-Time Sync
+- Mobile-First Design
+
+Visual: Chip-Grafik + Dashboard-Screenshot
+```
+
+***
+
+### **1.5 Analytics Preview**
+
+```
+Headline: "Leads werden endlich messbar"
+
+Dashboard Mockup zeigt:
+- Total Scans
+- Unique Scans
+- Lead Conversions
+- Top Performer (Mitarbeiter-Ranking)
+- Heatmap (Scan-Zeiten)
+
+Problem kommunizieren:
+"Auf Messen sind Leads erst unsichtbar – 
+mit NFCwear sehen Sie live, wer konvertiert."
+```
+
+***
+
+### **1.6 Social Proof / Trust Section**
+
+```
+Logos: (Wenn vorhanden)
+- Startup-Partner
+- Early Adopters
+- Tech-Partner (Supabase, Stripe)
+
+Testimonials: (Placeholder)
+"Unser Sales-Team hat 3x mehr Leads auf der letzten Messe gesammelt."
+- Max Mustermann, CEO @ Example GmbH
+```
+
+***
+
+### **1.7 Pricing Teaser (Optional)**
+
+```
+3 Tier-Cards:
+
+1. Starter (KMU)
+   - CSV-Export
+   - Basis-Analytics
+   - 10 Hoodies
+   
+2. Pro (Mittelstand)
+   - CRM-Integration (Salesforce, HubSpot)
+   - Advanced Analytics
+   - Unbegrenzte Hoodies
+   
+3. Enterprise
+   - Custom Features
+   - Dedicated Support
+   - API Access
+
+CTA: "Preise anfragen" (öffnet Contact Form)
+```
+
+***
+
+### **1.8 Contact Form / CTA Section**
+
+```
+Headline: "Bereit für den digitalen Handshake?"
+
+Formular:
+- Name
+- E-Mail
+- Firma
+- Anwendungsfall (Dropdown: Corporate/Hospitality/Campaign)
+- Nachricht (optional)
+
+CTA Button: "Demo vereinbaren"
+
+Zusatz:
+- Calendly-Integration für Terminbuchung
+- "Wir melden uns innerhalb von 24h"
+```
+
+***
+
+### **1.9 Footer**
+
+```
+Links:
+- Produkt
+- Features
+- Preise
+- Kontakt
+- Impressum
+- Datenschutz
+- AGB
+
+Socials:
+- LinkedIn
+- Instagram (optional)
+
+Newsletter-Signup:
+"Neuigkeiten & Messe-Tipps"
+```
+
+***
+
+## **🔧 PHASE 2: TECHNISCHE INFRASTRUKTUR**
+
+### **2.1 NFC-Redirect-System**
+
+**Flow:**
+```
+1. User scannt Chip
+2. URL: nfc.severmore.de/t/{UID}?sun={CMAC}
+3. Backend:
+   - Verifiziert SUN (NTAG424 DNA Security)
+   - Sucht Chip UID in DB
+   - Ermittelt aktiven "Mode"
+   - Redirect zu Target URL
+```
+
+**DB Schema (Supabase):**
+```sql
+-- Chips Table
+chips (
+  id: uuid (PK)
+  uid: string (Unique, NFC Chip UID)
+  company_id: uuid (FK -> companies)
+  assigned_user_id: uuid (FK -> users, nullable)
+  active_mode: enum (corporate, hospitality, campaign)
+  created_at: timestamp
+  last_scan: timestamp
+)
+
+-- Companies Table
+companies (
+  id: uuid (PK)
+  name: string
+  plan: enum (starter, pro, enterprise)
+  crm_integration: jsonb (Salesforce/HubSpot Config)
+  created_at: timestamp
+)
+
+-- Users Table (Mitarbeiter)
+users (
+  id: uuid (PK)
+  company_id: uuid (FK)
+  email: string
+  name: string
+  job_title: string
+  profile_pic: string (URL)
+  vcard_data: jsonb (Kontaktdaten)
+  social_links: jsonb (LinkedIn, etc.)
+  ghost_mode: boolean (404 bei Scan)
+  created_at: timestamp
+)
+
+-- Scans Table (Analytics)
+scans (
+  id: uuid (PK)
+  chip_id: uuid (FK)
+  user_id: uuid (FK, nullable)
+  scan_time: timestamp
+  ip_address: string
+  user_agent: string
+  location: jsonb (optional: Geo-Data)
+  mode_at_scan: enum
+)
+
+-- Leads Table
+leads (
+  id: uuid (PK)
+  chip_id: uuid (FK)
+  captured_by_user_id: uuid (FK)
+  lead_name: string
+  lead_email: string
+  lead_phone: string (optional)
+  sentiment: enum (hot, warm, cold) -- Ampel
+  notes: text
+  created_at: timestamp
+  follow_up_sent: boolean
+)
+
+-- Campaign Overrides
+campaign_overrides (
+  id: uuid (PK)
+  company_id: uuid (FK)
+  target_url: string
+  active: boolean
+  start_date: timestamp
+  end_date: timestamp
+)
+```
+
+***
+
+### **2.2 Dynamic Routing Engine**
+
+**Backend Logic (Supabase Edge Functions):**
+
+```javascript
+// nfc-redirect.ts
+export async function handler(req) {
+  const { uid, sun } = req.query;
+  
+  // 1. Verify NTAG424 SUN
+  if (!verifySUN(uid, sun)) {
+    return redirect('/error/invalid-chip');
+  }
+  
+  // 2. Lookup Chip in DB
+  const chip = await supabase
+    .from('chips')
+    .select('*, company_id, assigned_user_id, active_mode')
+    .eq('uid', uid)
+    .single();
+  
+  if (!chip) return redirect('/error/chip-not-found');
+  
+  // 3. Log Scan
+  await logScan(chip.id, req);
+  
+  // 4. Check Campaign Override
+  const override = await getActiveOverride(chip.company_id);
+  if (override) return redirect(override.target_url);
+  
+  // 5. Route by Mode
+  switch (chip.active_mode) {
+    case 'corporate':
+      return redirect(`/profile/${chip.assigned_user_id}`);
+    case 'hospitality':
+      return redirect(`/review/${chip.company_id}`);
+    case 'campaign':
+      return redirect(`/campaign/${chip.company_id}`);
+    default:
+      return redirect('/error/mode-not-set');
+  }
+}
+```
+
+***
+
+## **📱 PHASE 3: MOBILE PROFILE PAGES**
+
+### **3.1 Corporate Mode - Digital Business Card**
+
+**URL:** `nfc.severmore.de/profile/{user_id}`
+
+**Elemente:**
+```html
+<!-- Mobile-First Design -->
+
+<Header>
+  - Company Logo (oben links)
+  - "Powered by Severmore" (klein, unten)
+</Header>
+
+<ProfileSection>
+  - Profilbild (rund, groß)
+  - Name (H1)
+  - Job Title (H2, leicht transparent)
+  - Company Name (klein)
+</ProfileSection>
+
+<CTAs>
+  1. "Kontakt speichern" Button (vCard Download)
+     -> Download: {name}.vcf
+     
+  2. "Let's Connect" Button (Lead Capture)
+     -> öffnet Modal/Slide-Up:
+     
+     Form:
+     - Dein Name*
+     - Deine E-Mail*
+     - Deine Firma
+     - Nachricht
+     
+     Submit -> Speichert in leads Table
+     
+     Pop-up an Mitarbeiter:
+     "Neuer Lead: Max Mustermann"
+     - 🟢 Hot Lead (Button)
+     - 🟡 Warm Lead (Button)
+     - 🔴 Cold Lead (Button)
+     - Notizfeld
+     - Speichern-Button
+     
+  3. Social Links (Icons)
+     - LinkedIn
+     - Website
+     - E-Mail
+     - Telefon
+</CTAs>
+
+<Recruiting-Section> (optional)
+  - "Wir stellen ein!" Banner
+  - Link zu Karriereseite
+</Recruiting-Section>
+
+<Footer>
+  - "Auch so eine Karte? → nfc.severmore.de"
+</Footer>
+```
+
+**Design:**
+- Hintergrund: Gradient (Brand-Farben)
+- Buttons: Rounded, Shadow, Hover-Effects
+- Animations: Smooth Slide-Ins
+- Dark Mode Support
+
+***
+
+### **3.2 Hospitality Mode - Review Booster**
+
+**URL:** `nfc.severmore.de/review/{company_id}`
+
+**Elemente:**
+```html
+<Header>
+  - Restaurant Logo
+  - Name
+  - "Wie war dein Besuch?"
+</Header>
+
+<ReviewOptions>
+  1. Google Maps Review
+     Button: "Auf Google bewerten"
+     -> Redirect: https://g.page/r/{place_id}/review
+     
+  2. TripAdvisor Review
+     Button: "Auf TripAdvisor bewerten"
+     -> Redirect: TripAdvisor Review URL
+     
+  3. Direktes Feedback (optional)
+     Form: Sterne + Kommentar
+     -> Speichert in internem Feedback-System
+</ReviewOptions>
+
+<DigitalMenu>
+  - "Unsere Speisekarte" Button
+  - öffnet PDF oder Image Gallery
+</DigitalMenu>
+
+<TippingOption> (Stripe Integration)
+  - "Trinkgeld geben?" Button
+  - öffnet Stripe Payment Link
+  - Beträge: 2€, 5€, 10€, Custom
+</TippingOption>
+```
+
+***
+
+### **3.3 Campaign Mode - Marketing Redirect**
+
+**URL:** `nfc.severmore.de/campaign/{company_id}`
+
+**Dynamischer Redirect:**
+- Alle Chips der Company → eine Ziel-URL
+- Admin kann im Dashboard setzen:
+  - Target URL
+  - Start-/Enddatum
+  - Active/Inactive Toggle
+
+**Beispiel Use Cases:**
+- Black Friday: Alle Hoodies → Landing Page mit Countdown
+- Messe: Alle Hoodies → "Jetzt scannen & 15% Rabatt sichern"
+- Produktlaunch: Alle Hoodies → neue Produktseite
+
+**Landing Page Template:**
+```html
+<Header>
+  - Company Branding
+  - Campaign Title
+</Header>
+
+<Hero>
+  - Countdown Timer (optional)
+  - Angebot/Call-to-Action
+  - Rabattcode (groß angezeigt)
+</Hero>
+
+<CTA>
+  - "Jetzt einlösen" Button
+  - Lead Capture Form (optional)
+</CTA>
+```
+
+***
+
+## **🎛️ PHASE 4: ADMIN DASHBOARD**
+
+**URL:** `admin.nfc.severmore.de`
+
+### **4.1 Login & Auth**
+
+```
+Supabase Auth:
+- E-Mail/Password
+- Magic Links (Passwordless)
+- Role-Based Access:
+  - Super Admin (Severmore)
+  - Company Admin
+  - User (Mitarbeiter)
+```
+
+***
+
+### **4.2 Dashboard Overview**
+
+**Company Admin View:**
+
+```
+Widgets:
+1. Total Scans (diese Woche)
+2. Unique Scans
+3. Lead Conversions
+4. Top Performer (Mitarbeiter-Ranking)
+
+Charts:
+- Scan-Verlauf (Linien-Chart)
+- Scans nach Uhrzeit (Heatmap)
+- Leads nach Sentiment (Pie Chart: Hot/Warm/Cold)
+```
+
+***
+
+### **4.3 Device Management**
+
+**Übersicht:**
+```
+Tabelle: Alle Chips der Company
+
+Columns:
+- Chip UID
+- Zugewiesen an (User)
+- Aktiver Modus
+- Letzer Scan
+- Total Scans
+- Aktionen (Edit, Deaktivieren)
+
+Actions:
+- Chip zuweisen (Dropdown: User auswählen)
+- Modus wechseln (Corporate/Hospitality/Campaign)
+- Ghost Mode aktivieren (404 bei Scan)
+```
+
+**Massen-Bearbeitung:**
+```
+Checkbox-Select + Bulk Actions:
+- Alle auf "Campaign Mode" umstellen
+- Alle auf "Messemodus" (Custom URL)
+- Alle deaktivieren
+```
+
+***
+
+### **4.4 Profile Editor (User View)**
+
+**Mitarbeiter können selbst bearbeiten:**
+
+```
+Sections:
+1. Persönliche Daten
+   - Profilbild (Upload)
+   - Name
+   - Job Title
+   - Bio (optional)
+   
+2. Kontaktdaten (vCard)
+   - E-Mail*
+   - Telefon
+   - Adresse
+   
+3. Social Links
+   - LinkedIn URL
+   - Website URL
+   - Custom Links (+ Add)
+   
+4. Einstellungen
+   - Ghost Mode Toggle
+   - Browserspracherkennung (Auto-Translate)
+   - Lead Notifications (Push/Email)
+   
+Save Button: "Änderungen speichern"
+Preview Button: "Vorschau anzeigen"
+```
+
+***
+
+### **4.5 Lead Management**
+
+**Tabelle: Alle erfassten Leads**
+
+```
+Columns:
+- Lead Name
+- E-Mail
+- Erfasst von (User)
+- Datum/Zeit
+- Sentiment (🟢🟡🔴)
+- Notizen
+- Follow-Up Status
+
+Filters:
+- Nach User
+- Nach Sentiment
+- Nach Datum
+- Nach Event (wenn Messe-Tracking aktiv)
+
+Actions:
+- Lead bearbeiten
+- Notiz hinzufügen
+- Follow-Up markieren
+- Lead löschen
+```
+
+**Export-Optionen:**
+
+**1. CSV-Export (Starter/Pro Plan)**
+```
+Button: "Leads als CSV exportieren"
+Download: leads_export_{date}.csv
+
+Spalten:
+- Name, E-Mail, Firma, Telefon, Erfasst von, Datum, Sentiment, Notizen
+```
+
+**2. CRM-Integration (Pro/Enterprise)**
+```
+Realtime API zu:
+- Salesforce
+- HubSpot
+- Pipedrive (optional)
+
+Workflow:
+1. Lead wird erfasst
+2. Webhook sendet Daten an CRM
+3. Lead erscheint automatisch im CRM-System
+
+Config im Dashboard:
+- API Keys eingeben
+- Mapping konfigurieren (welche Felder → welche CRM-Felder)
+- Test-Sync durchführen
+```
+
+***
+
+### **4.6 Analytics Dashboard**
+
+**Erweiterte Analytics:**
+
+```
+Sections:
+
+1. Scan-Analytics
+   - Total Scans (All Time)
+   - Unique Scans
+   - Avg. Scans/Tag
+   - Peak-Zeiten (Heatmap)
+   
+2. Lead-Analytics
+   - Total Leads
+   - Conversion Rate (Scans → Leads)
+   - Leads nach Sentiment
+   - Leads nach Mitarbeiter
+   
+3. Performance-Ranking
+   - Top 5 Mitarbeiter (nach Scans)
+   - Top 5 Mitarbeiter (nach Leads)
+   - Top 5 Mitarbeiter (nach Hot Leads)
+   
+   (Positiver Effekt auf Leistung → Provision möglich)
+   
+4. Event-Tracking (optional)
+   - Messe-spezifische Analytics
+   - ROI-Berechnung
+   - Vergleich: Vorher/Nachher
+```
+
+***
+
+### **4.7 Campaign Manager**
+
+**Central Override Control:**
+
+```
+Section: "Aktive Kampagne"
+
+Form:
+- Kampagnen-Name
+- Ziel-URL*
+- Start-Datum
+- End-Datum
+- Countdown aktivieren (Ja/Nein)
+- Rabattcode (optional)
+
+Toggle: "Kampagne aktivieren"
+→ Wenn aktiv: ALLE Chips der Company redirecten zur Kampagnen-URL
+
+Vorschau: "So sieht die Kampagne aus" (Mobile Preview)
+```
+
+***
+
+### **4.8 Settings (Company-Level)**
+
+```
+Sections:
+
+1. Company Profile
+   - Logo (Upload)
+   - Name
+   - Website
+   - Branding (Farben, Fonts)
+   
+2. Integrations
+   - Calendly (Terminbuchung)
+   - Stripe (Trinkgeld/Payments)
+   - CRM (Salesforce, HubSpot)
+   - Zapier/Make (optional)
+   
+3. Team-Management
+   - Mitarbeiter einladen (E-Mail)
+   - Rollen vergeben (Admin/User)
+   - Mitarbeiter entfernen
+   
+4. Billing
+   - Aktueller Plan
+   - Upgrade-Optionen
+   - Rechnungen
+   
+5. DSGVO
+   - Datenexport (alle Company-Daten)
+   - Account löschen
+```
+
+***
+
+## **🔔 PHASE 5: ZUSATZFEATURES (Nice-to-Have)**
+
+### **5.1 Sentiment-Push-Notifications**
+
+**Workflow:**
+```
+1. Lead wird erfasst
+2. Mitarbeiter bekommt Push-Notification:
+   "Neuer Lead: Max Mustermann"
+   
+3. Mitarbeiter kann direkt in App:
+   - Sentiment setzen (Hot/Warm/Cold)
+   - Notiz hinzufügen ("Kunde mag blau")
+   - Lead speichern
+```
+
+**Tech:**
+- Push Notifications via Supabase Realtime
+- Optional: SMS-Benachrichtigung (Twilio)
+
+***
+
+### **5.2 Voice-to-Text Notizen**
+
+**Feature:**
+```
+Recap Button in Mobile-App:
+- Mitarbeiter spricht Notiz ein
+- Speech-to-Text (Web Speech API oder Deepgram)
+- Notiz wird automatisch zum Lead gespeichert
+
+Beispiel:
+"Kunde interessiert sich für Enterprise-Plan, 
+Budget ca. 50k, will nächste Woche telefonieren"
+
+→ Wird zu Lead-Notiz
+```
+
+***
+
+### **5.3 Walking POS (Point of Sale)**
+
+**Use Case:** Einzelhandel/Gastro
+
+```
+Feature:
+- Kunde scannt NFC-Tag
+- Landet auf Payment-Page
+- Bezahlt per Stripe
+- Mitarbeiter bekommt Bestätigung
+
+Beispiel:
+"Kunde hasst warten an der Kasse"
+→ Scan → Pay → Go
+```
+
+***
+
+### **5.4 Follow-Up Automation**
+
+**Workflow:**
+```
+1. Lead wird erfasst
+2. Automatische Follow-Up-Mail nach X Stunden
+
+Template-Beispiele (im Dashboard editierbar):
+- "Danke für das Gespräch auf der Messe!"
+- "Hier sind die versprochenen Infos..."
+- Custom Templates
+
+Integration:
+- SendGrid/Mailgun für Mails
+- Optional: WhatsApp Business API
+```
+
+***
+
+### **5.5 DPP-Compliance (EU Digital Product Passport)**
+
+**Feature:**
+```
+Ab 2026 Pflicht für EU-Unternehmen:
+- Produkt-Infos auf NFC-Tag
+- Herstellungsdaten
+- Nachhaltigkeit
+
+Severmore-Vorteil:
+"Wir machen euch DPP-ready"
+
+Integration im Dashboard:
+- DPP-Daten hinterlegen
+- Automatisch auf Scan abrufbar
+```
+
+***
+
+## **📂 DATEISTRUKTUR & COMPONENTS**
+
+### **Frontend (Lovable/React)**
+
+```
+/src
+  /components
+    /landing
+      - Hero.tsx
+      - Features.tsx
+      - UseCases.tsx
+      - Analytics.tsx
+      - Pricing.tsx
+      - ContactForm.tsx
+      - Footer.tsx
+      
+    /mobile
+      - CorporateProfile.tsx
+      - LeadCaptureForm.tsx
+      - ReviewBooster.tsx
+      - DigitalMenu.tsx
+      - CampaignLanding.tsx
+      
+    /dashboard
+      - Overview.tsx
+      - DeviceManagement.tsx
+      - ProfileEditor.tsx
+      - LeadManagement.tsx
+      - AnalyticsDashboard.tsx
+      - CampaignManager.tsx
+      - Settings.tsx
+      
+    /shared
+      - Button.tsx
+      - Card.tsx
+      - Modal.tsx
+      - Form.tsx
+      - Table.tsx
+      - Chart.tsx
+      
+  /pages
+    - index.tsx (Landing)
+    - /t/[uid].tsx (NFC Redirect)
+    - /profile/[userId].tsx
+    - /review/[companyId].tsx
+    - /campaign/[companyId].tsx
+    - /admin/dashboard.tsx
+    - /admin/devices.tsx
+    - /admin/leads.tsx
+    - /admin/analytics.tsx
+    - /admin/settings.tsx
+    
+  /lib
+    - supabase.ts
+    - auth.ts
+    - nfc-verify.ts (NTAG424 SUN)
+    - analytics.ts
+    - crm-integration.ts
+    
+  /styles
+    - globals.css
+    - landing.css
+    - dashboard.css
+    
+  /assets
+    - /icons
+    - /images
+    - /mockups
+```
+
+***
+
+### **Backend (Supabase Edge Functions)**
+
+```
+/supabase
+  /functions
+    - nfc-redirect/index.ts
+    - verify-sun/index.ts
+    - capture-lead/index.ts
+    - send-notification/index.ts
+    - export-csv/index.ts
+    - crm-webhook/index.ts
+    
+  /migrations
+    - 001_initial_schema.sql
+    - 002_add_campaigns.sql
+    - 003_add_analytics.sql
+```
+
+***
+
+## **🎨 DESIGN ASSETS (Was Noah dir schickt)**
+
+### **Brandbook-Elemente:**
+
+```
+1. Logo-Varianten
+   - Logo (Primary)
+   - Logo (White)
+   - Logo (Mark only)
+   
+2. Farbpalette
+   - Primary: Electric Blue (#0070F3 oder ähnlich)
+   - Secondary: Yellow/Gold
+   - Neutrals: White, Grays, Black
+   - Dark Mode: Anpassungen
+   
+3. Typography
+   - Headings: Clash Display / Inter Bold
+   - Body: Inter / Geist
+   - Code: Jetbrains Mono (optional)
+   
+4. Components
+   - Button Styles
+   - Card Styles
+   - Form Elements
+   - Icons (Lucide/Heroicons)
+   
+5. Spacing & Layout
+   - Grid System (12-Column)
+   - Breakpoints (Mobile/Tablet/Desktop)
+   - Padding/Margins
+   
+6. Animations
+   - Page Transitions
+   - Hover Effects
+   - Loading States
+```
+
+**Tools für Farben:**
+- Coolors.co
+- Adobe Color
+- Tailwind Color Palette Generator
+
+***
+
+## **🚀 DEVELOPMENT ROADMAP**
+
+### **Sprint 1 (Woche 1-2): Foundation**
+- [ ] Landing Page Design & Development
+  - [ ] Hero Section
+  - [ ] Features Section
+  - [ ] Use Cases
+  - [ ] Contact Form
+- [ ] Supabase Setup
+  - [ ] Auth
+  - [ ] DB Schema
+  - [ ] Edge Functions Basics
+- [ ] Domain Setup (nfc.severmore.de)
+
+***
+
+### **Sprint 2 (Woche 3-4): Core Functionality**
+- [ ] NFC-Redirect-System
+  - [ ] NTAG424 SUN Verification
+  - [ ] Dynamic Routing Engine
+- [ ] Mobile Profile Pages
+  - [ ] Corporate Mode
+  - [ ] Lead Capture Form
+  - [ ] vCard Download
+- [ ] Admin Dashboard (Basic)
+  - [ ] Login
+  - [ ] Device List
+  - [ ] Profile Editor
+
+***
+
+### **Sprint 3 (Woche 5-6): Advanced Features**
+- [ ] Hospitality Mode
+  - [ ] Review Redirects
+  - [ ] Digital Menu
+- [ ] Campaign Mode
+  - [ ] Central Override
+  - [ ] Campaign Manager
+- [ ] Analytics Dashboard
+  - [ ] Scan-Tracking
+  - [ ] Lead-Analytics
+  - [ ] Ranking
+
+***
+
+### **Sprint 4 (Woche 7-8): Integrations**
+- [ ] CRM-Integration
+  - [ ] Salesforce API
+  - [ ] HubSpot API
+  - [ ] Webhook-System
+- [ ] CSV-Export
+- [ ] Calendly-Integration
+- [ ] Stripe (Tipping/Payments)
+
+***
+
+### **Sprint 5 (Woche 9-10): Polish & Testing**
+- [ ] Push-Notifications
+- [ ] Voice-to-Text Notizen
+- [ ] Follow-Up Automation
+- [ ] Dark Mode
+- [ ] Responsive Optimierung
+- [ ] Security Audit
+- [ ] DSGVO-Compliance Check
+
+***
+
+### **Sprint 6 (Woche 11-12): Launch Prep**
+- [ ] Beta-Testing mit Pilot-Kunden
+- [ ] Bug Fixes
+- [ ] Performance-Optimierung
+- [ ] Documentation
+- [ ] Onboarding-Flow
+- [ ] Support-System
+
+***
+
+## **✅ TECHNICAL CHECKLIST**
+
+### **Landing Page:**
+- [ ] Hero mit Hoodie-Mockup
+- [ ] 3 Modi-Darstellung (Corporate, Hospitality, Campaign)
+- [ ] ROI-Beispiel/Stats
+- [ ] Tech-Highlights (NTAG424, Cloud)
+- [ ] Analytics-Preview
+- [ ] Social Proof/Testimonials
+- [ ] Pricing-Teaser
+- [ ] Contact Form
+- [ ] Footer (Links, Impressum, Datenschutz)
+- [ ] Responsive (Mobile/Tablet/Desktop)
+- [ ] Dark Mode Toggle
+- [ ] SEO (Meta Tags, Schema.org)
+- [ ] Performance (Lighthouse Score >90)
+
+***
+
+### **NFC-System:**
+- [ ] NTAG424 DNA Chip-Integration
+- [ ] SUN-Verification
+- [ ] Dynamic URL Routing
+- [ ] Scan-Logging (Analytics)
+- [ ] Error Handling (404, Invalid Chip)
+- [ ] Rate Limiting (Anti-Spam)
+
+***
+
+### **Mobile Profiles:**
+- [ ] Corporate Mode:
+  - [ ] vCard Download
+  - [ ] Lead Capture Form
+  - [ ] Sentiment-Ampel (Push-Notification)
+  - [ ] Social Links
+  - [ ] Recruiting-Link
+- [ ] Hospitality Mode:
+  - [ ] Google Review Redirect
+  - [ ] TripAdvisor Redirect
+  - [ ] Digitale Speisekarte
+  - [ ] Trinkgeld-Option (Stripe)
+- [ ] Campaign Mode:
+  - [ ] Custom Landing Page
+  - [ ] Countdown Timer
+  - [ ] Rabattcode-Display
+
+***
+
+### **Admin Dashboard:**
+- [ ] Auth (Login/Logout/Password Reset)
+- [ ] Overview Dashboard (Widgets, Charts)
+- [ ] Device Management:
+  - [ ] Chip-Liste
+  - [ ] Zuweisung (User)
+  - [ ] Modus-Wechsel
+  - [ ] Massen-Bearbeitung
+  - [ ] Ghost Mode Toggle
+- [ ] Profile Editor (User-Self-Service)
+- [ ] Lead Management:
+  - [ ] Tabelle mit Filtern
+  - [ ] CSV-Export
+  - [ ] CRM-Sync (Salesforce, HubSpot)
+  - [ ] Notizen/Sentiment
+- [ ] Analytics Dashboard:
+  - [ ] Scan-Charts
+  - [ ] Lead-Charts
+  - [ ] Performance-Ranking
+- [ ] Campaign Manager:
+  - [ ] Central Override
+  - [ ] Start-/Enddatum
+  - [ ] Vorschau
+- [ ] Settings:
+  - [ ] Company Profile
+  - [ ] Integrations (Calendly, Stripe, CRM)
+  - [ ] Team-Management
+  - [ ] Billing
+  - [ ] DSGVO (Export/Löschen)
+
+***
+
+### **Integrations:**
+- [ ] Supabase (Auth, DB, Realtime)
+- [ ] Stripe (Payments)
+- [ ] Salesforce API
+- [ ] HubSpot API
+- [ ] Calendly (Terminbuchung)
+- [ ] SendGrid/Mailgun (E-Mails)
+- [ ] Twilio (SMS, optional)
+- [ ] Deepgram (Voice-to-Text, optional)
+
+***
+
+### **Security & Compliance:**
+- [ ] NTAG424 SUN-Authentication
+- [ ] HTTPS (SSL/TLS)
+- [ ] DSGVO-konform:
+  - [ ] Server in Frankfurt (Supabase EU)
+  - [ ] Datenschutzerklärung
+  - [ ] Cookie-Banner
+  - [ ] Recht auf Datenexport
+  - [ ] Recht auf Löschung
+- [ ] Rate Limiting
+- [ ] XSS-Protection
+- [ ] CSRF-Protection
+- [ ] Input Validation
+- [ ] SQL Injection Prevention (Supabase RLS)
+
+***
+
+### **Design:**
+- [ ] Linear/Vercel/Raycast Aesthetic
+- [ ] Farben: Weiß, Electric Blue, Yellow Akzente
+- [ ] Typography: Inter, Geist, Clash Display
+- [ ] Dark Mode Support
+- [ ] Responsive Design
+- [ ] Smooth Animations
+- [ ] Loading States
+- [ ] Error States
+- [ ] Empty States
+
+***
+
+### **Performance:**
+- [ ] Lighthouse Score >90
+- [ ] Core Web Vitals optimiert
+- [ ] Image Optimization (WebP, Lazy Loading)
+- [ ] Code Splitting
+- [ ] CDN (Vercel/Cloudflare)
+- [ ] Caching Strategy
+- [ ] DB Query Optimization
+
+***
+
+### **Testing:**
+- [ ] Unit Tests (Jest/Vitest)
+- [ ] Integration Tests (Playwright/Cypress)
+- [ ] E2E Tests (kritische Flows)
+- [ ] Mobile Testing (iOS/Android)
+- [ ] Browser Testing (Chrome, Safari, Firefox)
+- [ ] Load Testing (Scan-Peaks bei Messen)
+
+***
+
+## **📊 PRIORITÄTEN**
+
+### **MUST-HAVE (MVP):**
+1. Landing Page
+2. NFC-Redirect-System
+3. Corporate Mode (Mobile Profile)
+4. Lead Capture Form
+5. Admin Dashboard (Basic)
+6. Device Management
+7. Analytics (Basic)
+8. CSV-Export
+
+### **SHOULD-HAVE (V1.1):**
+1. Hospitality Mode
+2. Campaign Mode
+3. CRM-Integration (Salesforce, HubSpot)
+4. Advanced Analytics
+5. Massen-Bearbeitung
+6. Calendly-Integration
+
+### **NICE-TO-HAVE (V2.0):**
+1. Push-Notifications
+2. Voice-to-Text
+3. Follow-Up Automation
+4. Walking POS
+5. DPP-Compliance
+6. Multi-Language Support
+
+***
+
+## **💡 NOAH'S FEEDBACK INTEGRATION**
+
+Aus der Voice Message & Docs:
+
+✅ **CRM-Anbindung:** Salesforce & HubSpot API (Realtime oder CSV-Fallback)  
+✅ **Sentiment-Feature:** Ampel (Hot/Warm/Cold) + Push-Notification + Notizfeld  
+✅ **CSV-Export:** Für KMU im Pro-Plan  
+✅ **Brandbook:** Wartet auf Noahs Assets (Farben, Fonts, Logo)  
+✅ **Analytics:** "Leads werden endlich messbar" - Dashboard mit ROI-Focus  
+✅ **Messen-Problem:** Kommunizieren auf Landing Page ("Leads sind unsichtbar...")  
+✅ **Fachwörter-Mix:** SaaS, ROI, CRM (aber nicht zu viel Tech-Jargon)  
+✅ **Deutsche Texte:** Alle UI-Texte auf Deutsch  
+
+***
+
+## **🎯 NEXT STEPS FÜR DICH:**
+
+1. **Warte auf Lovable Pro** (Kreditkarte kommt in 1 Woche)
+2. **Bereite Brandbook vor:** Sobald Noah Farben/Logo schickt
+3. **Start mit Landing Page:** Hero + Features (Mockups erstmal Placeholder)
+4. **Supabase Setup:** DB-Schema aufsetzen, Edge Functions vorbereiten
+5. **Prototyp NFC-Redirect:** Test mit Dummy-Chip-UID
+6. **Mobile Profile Mockup:** Corporate Mode Design in Lovable
+7. **Admin Dashboard Wireframes:** Struktur planen
+
+
+Perfekt! Du hast recht - ich gehe jetzt **tiefer auf die NFC-Templates** ein und erweitere die **Kontaktfunktion für direkte Nachrichten**. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/112082481/427ed13f-87b1-4d72-a47c-8306f259874f/NFCwear_-Wearable-SaaS-Plattform-Briefing.pdf)
+
+***
+
+# **🎨 DETAILLIERTE NFC-PAGE TEMPLATES**
+
+## **📱 TEMPLATE 1: CORPORATE MODE - Digital Business Card**
+
+### **Design System**
+
+**Layout-Architektur:**
+```
+Mobile-First Design (375px - 430px optimiert)
+Aspect Ratio: 9:16 (Full Screen)
+Safe Area: 20px Padding (iOS Notch/Home Indicator)
+```
+
+**Color Scheme (Dynamisch je nach Company Branding):**
+```css
+--primary: Company Brand Color (z.B. #0070F3)
+--secondary: Accent Color (z.B. #FFD700)
+--background: Linear Gradient (Primary → Secondary)
+--text-primary: #FFFFFF
+--text-secondary: rgba(255,255,255,0.7)
+--card-bg: rgba(255,255,255,0.95)
+--shadow: 0 10px 40px rgba(0,0,0,0.15)
+```
+
+***
+
+### **TEMPLATE 1A: "Premium Gradient" (Default)**
+
+```html
+<!-- URL: nfc.severmore.de/profile/{user_id} -->
+
+<div class="profile-container">
+  
+  <!-- Background -->
+  <div class="gradient-background">
+    <!-- Animated Gradient (Primary → Secondary, 45deg) -->
+    <!-- Subtle noise texture overlay for depth -->
+  </div>
+  
+  <!-- Header Section -->
+  <header class="profile-header">
+    <div class="company-logo">
+      <img src="{company_logo_url}" alt="Company">
+    </div>
+    <div class="nfc-indicator">
+      <svg><!-- NFC Wave Animation Icon --></svg>
+      <span>Kontakt gescannt</span>
+    </div>
+  </header>
+  
+  <!-- Profile Card (Glassmorphism) -->
+  <div class="profile-card">
+    
+    <!-- Avatar Section -->
+    <div class="avatar-container">
+      <div class="avatar-ring">
+        <!-- Animated ring around avatar -->
+      </div>
+      <img src="{profile_pic}" alt="{name}" class="avatar">
+      <div class="status-badge">
+        <span class="pulse-dot"></span>
+        Verfügbar
+      </div>
+    </div>
+    
+    <!-- Info Section -->
+    <div class="profile-info">
+      <h1 class="name">{Vorname Nachname}</h1>
+      <h2 class="job-title">{Position}</h2>
+      <p class="company">{Firma GmbH}</p>
+      <p class="tagline">{Optional: Personal Tagline}</p>
+    </div>
+    
+    <!-- Quick Stats (Optional) -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-icon">📍</span>
+        <span class="stat-text">{Stadt}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-icon">💼</span>
+        <span class="stat-text">{Abteilung}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Primary Actions (Buttons) -->
+  <div class="action-buttons">
+    
+    <!-- 1. Save Contact (vCard Download) -->
+    <button class="btn btn-primary" onclick="downloadVCard()">
+      <svg><!-- Download Icon --></svg>
+      Kontakt speichern
+    </button>
+    
+    <!-- 2. Let's Connect (Lead Capture) -->
+    <button class="btn btn-secondary" onclick="openLeadForm()">
+      <svg><!-- Handshake Icon --></svg>
+      Jetzt vernetzen
+    </button>
+    
+    <!-- 3. Direct Message (NEU!) -->
+    <button class="btn btn-outline" onclick="openMessageForm()">
+      <svg><!-- Message Icon --></svg>
+      Nachricht senden
+    </button>
+  </div>
+  
+  <!-- Social Links (Icon Bar) -->
+  <div class="social-links">
+    <a href="{linkedin_url}" class="social-icon linkedin">
+      <svg><!-- LinkedIn Icon --></svg>
+    </a>
+    <a href="mailto:{email}" class="social-icon email">
+      <svg><!-- Email Icon --></svg>
+    </a>
+    <a href="tel:{phone}" class="social-icon phone">
+      <svg><!-- Phone Icon --></svg>
+    </a>
+    <a href="{website_url}" class="social-icon website">
+      <svg><!-- Globe Icon --></svg>
+    </a>
+  </div>
+  
+  <!-- Recruiting Banner (Conditional) -->
+  <div class="recruiting-banner" *ngIf="company.hiring">
+    <div class="banner-icon">🚀</div>
+    <div class="banner-text">
+      <strong>Wir stellen ein!</strong>
+      <p>Entdecke spannende Positionen bei uns</p>
+    </div>
+    <a href="{jobs_url}" class="banner-cta">
+      Karriere →
+    </a>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="profile-footer">
+    <p class="powered-by">
+      Powered by <a href="https://nfc.severmore.de">Severmore</a>
+    </p>
+    <a href="https://nfc.severmore.de" class="cta-small">
+      Auch so eine Karte? →
+    </a>
+  </footer>
+  
+</div>
+```
+
+***
+
+### **🔥 NEU: DIREKTNACHRICHTEN-FUNKTION**
+
+#### **Funktion: "Nachricht senden" Button**
+
+**Use Case:**
+```
+Besucher kann direkt eine Nachricht an den Mitarbeiter senden, 
+ohne Lead-Formular auszufüllen. 
+Ideal für schnelle Fragen, Meeting-Requests, oder Follow-Ups.
+```
+
+**Workflow:**
+```
+1. Besucher klickt "Nachricht senden"
+2. Modal öffnet sich (Slide-Up Animation)
+3. Besucher füllt Formular aus:
+   - Dein Name*
+   - Deine E-Mail*
+   - Betreff (Dropdown oder Freitext)
+   - Nachricht*
+4. Submit → Nachricht wird gespeichert & verschickt
+5. Mitarbeiter bekommt:
+   - Push-Notification (App/Browser)
+   - E-Mail-Benachrichtigung
+   - Eintrag in Dashboard (Inbox)
+```
+
+***
+
+### **Modal: Nachricht senden**
+
+```html
+<!-- Message Form Modal -->
+<div class="modal-overlay" id="messageModal">
+  <div class="modal-content message-form">
+    
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Nachricht an {Name}</h3>
+      <button class="close-btn" onclick="closeMessageForm()">
+        <svg><!-- X Icon --></svg>
+      </button>
+    </div>
+    
+    <!-- Form -->
+    <form id="directMessageForm" onsubmit="sendMessage(event)">
+      
+      <!-- Name Input -->
+      <div class="form-group">
+        <label for="sender_name">Dein Name*</label>
+        <input 
+          type="text" 
+          id="sender_name" 
+          name="sender_name" 
+          placeholder="Max Mustermann"
+          required
+        >
+      </div>
+      
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="sender_email">Deine E-Mail*</label>
+        <input 
+          type="email" 
+          id="sender_email" 
+          name="sender_email" 
+          placeholder="max@firma.de"
+          required
+        >
+      </div>
+      
+      <!-- Phone Input (Optional) -->
+      <div class="form-group">
+        <label for="sender_phone">Telefon (optional)</label>
+        <input 
+          type="tel" 
+          id="sender_phone" 
+          name="sender_phone" 
+          placeholder="+49 123 456789"
+        >
+      </div>
+      
+      <!-- Subject Dropdown -->
+      <div class="form-group">
+        <label for="message_subject">Betreff*</label>
+        <select id="message_subject" name="message_subject" required>
+          <option value="">Bitte auswählen...</option>
+          <option value="meeting_request">Meeting-Anfrage</option>
+          <option value="product_inquiry">Produktanfrage</option>
+          <option value="partnership">Kooperationsanfrage</option>
+          <option value="job_application">Bewerbung</option>
+          <option value="feedback">Feedback</option>
+          <option value="other">Sonstiges</option>
+        </select>
+      </div>
+      
+      <!-- Message Textarea -->
+      <div class="form-group">
+        <label for="message_body">Deine Nachricht*</label>
+        <textarea 
+          id="message_body" 
+          name="message_body" 
+          rows="5"
+          placeholder="Hallo {Vorname}, &#10;&#10;ich würde gerne..."
+          required
+        ></textarea>
+        <span class="char-counter">0 / 500</span>
+      </div>
+      
+      <!-- Privacy Checkbox -->
+      <div class="form-group checkbox">
+        <input 
+          type="checkbox" 
+          id="privacy_consent" 
+          name="privacy_consent" 
+          required
+        >
+        <label for="privacy_consent">
+          Ich akzeptiere die 
+          <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>
+        </label>
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary btn-full">
+        <svg><!-- Send Icon --></svg>
+        Nachricht senden
+      </button>
+      
+    </form>
+    
+    <!-- Success State (Hidden initially) -->
+    <div class="success-message" id="messageSuccess" style="display:none;">
+      <svg class="success-icon"><!-- Checkmark Icon --></svg>
+      <h4>Nachricht versendet! 🎉</h4>
+      <p>{Name} wird sich in Kürze bei dir melden.</p>
+      <button class="btn btn-outline" onclick="closeMessageForm()">
+        Schließen
+      </button>
+    </div>
+    
+  </div>
+</div>
+```
+
+***
+
+### **Backend: Nachricht-System**
+
+**DB Schema Erweiterung:**
+
+```sql
+-- Messages Table
+CREATE TABLE messages (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE, -- Empfänger
+  chip_id UUID REFERENCES chips(id), -- Scan Source
+  
+  -- Sender Info
+  sender_name VARCHAR(255) NOT NULL,
+  sender_email VARCHAR(255) NOT NULL,
+  sender_phone VARCHAR(50),
+  
+  -- Message Content
+  subject VARCHAR(255) NOT NULL,
+  message_body TEXT NOT NULL,
+  
+  -- Status
+  status VARCHAR(50) DEFAULT 'unread', -- unread, read, replied, archived
+  is_spam BOOLEAN DEFAULT false,
+  
+  -- Metadata
+  created_at TIMESTAMP DEFAULT NOW(),
+  read_at TIMESTAMP,
+  replied_at TIMESTAMP,
+  
+  -- Analytics
+  ip_address VARCHAR(45),
+  user_agent TEXT,
+  referrer_url TEXT
+);
+
+-- Index für schnellen Zugriff
+CREATE INDEX idx_messages_user_status ON messages(user_id, status);
+CREATE INDEX idx_messages_created ON messages(created_at DESC);
+```
+
+***
+
+### **Notification Flow**
+
+**1. Push-Notification (Browser)**
+```javascript
+// Nach erfolgreichem Submit:
+if (Notification.permission === 'granted') {
+  new Notification('Neue Nachricht erhalten!', {
+    body: `${sender_name} hat dir eine Nachricht gesendet.`,
+    icon: '/icons/notification-icon.png',
+    badge: '/icons/badge.png',
+    tag: `message-${message_id}`,
+    requireInteraction: true,
+    actions: [
+      { action: 'view', title: 'Anzeigen' },
+      { action: 'dismiss', title: 'Später' }
+    ]
+  });
+}
+```
+
+**2. E-Mail-Benachrichtigung**
+```
+An: {user_email}
+Betreff: Neue Nachricht von {sender_name}
+
+Hallo {user_name},
+
+du hast eine neue Nachricht über deine NFCwear-Karte erhalten:
+
+Von: {sender_name} ({sender_email})
+Betreff: {subject}
+
+"{message_body}"
+
+---
+
+Jetzt antworten:
+{dashboard_url}/inbox/{message_id}
+
+oder direkt per E-Mail an: {sender_email}
+
+---
+Powered by Severmore NFCwear
+```
+
+**3. Dashboard Inbox**
+```
+Im Admin Dashboard erscheint:
+- Badge mit Anzahl ungelesener Nachrichten
+- Inbox-Seite mit Tabelle (wie E-Mail-Client)
+- Schnellantwort-Funktion
+```
+
+***
+
+### **Inbox im Dashboard**
+
+```html
+<!-- /admin/inbox -->
+
+<div class="inbox-container">
+  
+  <!-- Header -->
+  <div class="inbox-header">
+    <h2>Posteingang</h2>
+    <div class="inbox-filters">
+      <button class="filter active" data-filter="all">
+        Alle <span class="count">{total}</span>
+      </button>
+      <button class="filter" data-filter="unread">
+        Ungelesen <span class="count badge">{unread}</span>
+      </button>
+      <button class="filter" data-filter="starred">
+        Wichtig
+      </button>
+    </div>
+  </div>
+  
+  <!-- Message List -->
+  <div class="message-list">
+    
+    <!-- Message Item -->
+    <div class="message-item unread" data-id="{message_id}">
+      <div class="message-checkbox">
+        <input type="checkbox">
+      </div>
+      <div class="message-sender">
+        <div class="sender-avatar">
+          {Initials}
+        </div>
+        <div class="sender-info">
+          <strong>{sender_name}</strong>
+          <span class="sender-email">{sender_email}</span>
+        </div>
+      </div>
+      <div class="message-content">
+        <div class="message-subject">{subject}</div>
+        <div class="message-preview">{message_body_preview...}</div>
+      </div>
+      <div class="message-meta">
+        <span class="message-time">{relative_time}</span>
+        <span class="message-source">via NFC Scan</span>
+      </div>
+      <div class="message-actions">
+        <button class="btn-icon" onclick="markAsRead({id})">
+          <svg><!-- Check Icon --></svg>
+        </button>
+        <button class="btn-icon" onclick="openMessage({id})">
+          <svg><!-- Open Icon --></svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Repeat for each message... -->
+    
+  </div>
+  
+  <!-- Bulk Actions -->
+  <div class="bulk-actions" style="display:none;">
+    <button class="btn btn-sm" onclick="markSelectedAsRead()">
+      Als gelesen markieren
+    </button>
+    <button class="btn btn-sm" onclick="deleteSelected()">
+      Löschen
+    </button>
+  </div>
+  
+</div>
+```
+
+***
+
+### **Schnellantwort-Funktion**
+
+```html
+<!-- Message Detail View -->
+
+<div class="message-detail">
+  
+  <!-- Message Header -->
+  <div class="message-detail-header">
+    <button class="back-btn" onclick="goBack()">← Zurück</button>
+    <div class="actions">
+      <button class="btn-icon" onclick="starMessage()">⭐</button>
+      <button class="btn-icon" onclick="archiveMessage()">📦</button>
+      <button class="btn-icon" onclick="deleteMessage()">🗑️</button>
+    </div>
+  </div>
+  
+  <!-- Sender Info -->
+  <div class="sender-card">
+    <div class="sender-avatar-large">{Initials}</div>
+    <div class="sender-details">
+      <h3>{sender_name}</h3>
+      <a href="mailto:{sender_email}">{sender_email}</a>
+      <a href="tel:{sender_phone}">{sender_phone}</a>
+    </div>
+    <div class="message-timestamp">
+      {full_date_time}
+    </div>
+  </div>
+  
+  <!-- Message Content -->
+  <div class="message-body">
+    <div class="message-subject">
+      <strong>Betreff:</strong> {subject}
+    </div>
+    <div class="message-text">
+      {message_body}
+    </div>
+  </div>
+  
+  <!-- Quick Reply -->
+  <div class="quick-reply">
+    <h4>Schnellantwort</h4>
+    <form onsubmit="sendReply(event)">
+      <textarea 
+        placeholder="Deine Antwort..."
+        rows="4"
+      ></textarea>
+      <div class="reply-actions">
+        <button type="submit" class="btn btn-primary">
+          Antworten
+        </button>
+        <button type="button" class="btn btn-outline" onclick="openFullReply()">
+          Ausführliche Antwort
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Quick Reply Templates (Optional) -->
+  <div class="reply-templates">
+    <p>Vorlagen:</p>
+    <button class="template-btn" onclick="insertTemplate('meeting')">
+      Meeting vereinbaren
+    </button>
+    <button class="template-btn" onclick="insertTemplate('thanks')">
+      Danke für die Nachricht
+    </button>
+    <button class="template-btn" onclick="insertTemplate('forward')">
+      An Kollegen weiterleiten
+    </button>
+  </div>
+  
+</div>
+```
+
+***
+
+## **📱 TEMPLATE 1B: "Minimalist Card" (Alternative)**
+
+**Unterschiede zu Template 1A:**
+- Kein Gradient-Background → Solid White/Black
+- Profile Card zentral, keine Full-Screen
+- Mehr Whitespace
+- Card-Based Layout (wie Apple Contact Card)
+
+```
+Design:
+- Background: #F5F5F7 (Light) oder #1C1C1E (Dark)
+- Card: White (#FFFFFF) mit Shadow
+- Typography: SF Pro Display (Apple-Style)
+- Buttons: Pill-Shaped mit System Colors
+```
+
+***
+
+## **📱 TEMPLATE 1C: "Event Badge" (Messe-Optimiert)**
+
+**Besonderheiten für Messen:**
+
+```html
+<!-- Extra Elemente für Messestand -->
+
+<div class="event-badge">
+  <div class="event-info">
+    <span class="event-icon">📍</span>
+    <div>
+      <strong>Wir sind auf der {Messename}</strong>
+      <p>Halle {X}, Stand {Y}</p>
+    </div>
+  </div>
+</div>
+
+<div class="live-offer">
+  <div class="offer-badge pulse">🎁 LIVE</div>
+  <h3>Exklusiver Messerabatt!</h3>
+  <p class="discount-code">
+    Code: <strong>MESSE15</strong>
+  </p>
+  <div class="countdown">
+    <span class="countdown-label">Angebot endet in:</span>
+    <div class="countdown-timer">
+      <div class="time-unit">
+        <span class="time-value">{hours}</span>
+        <span class="time-label">Std</span>
+      </div>
+      <span class="separator">:</span>
+      <div class="time-unit">
+        <span class="time-value">{minutes}</span>
+        <span class="time-label">Min</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Zusätzlicher CTA -->
+<button class="btn btn-accent">
+  🎫 Rabatt jetzt sichern
+</button>
+```
+
+***
+
+## **📱 TEMPLATE 2: HOSPITALITY MODE - Review Booster**
+
+### **Layout:**
+
+```html
+<!-- URL: nfc.severmore.de/review/{company_id} -->
+
+<div class="hospitality-container">
+  
+  <!-- Header -->
+  <div class="hero-section">
+    <div class="restaurant-logo">
+      <img src="{logo_url}" alt="{restaurant_name}">
+    </div>
+    <h1 class="restaurant-name">{Name des Restaurants}</h1>
+    <div class="rating-display">
+      <span class="stars">⭐⭐⭐⭐⭐</span>
+      <span class="rating-text">4.8 / 5 bei Google</span>
+    </div>
+  </div>
+  
+  <!-- Main Question -->
+  <div class="feedback-prompt">
+    <h2>Wie war dein Besuch bei uns? 😊</h2>
+    <p>Dein Feedback hilft uns, noch besser zu werden!</p>
+  </div>
+  
+  <!-- Review Platforms -->
+  <div class="review-buttons">
+    
+    <!-- Google Review -->
+    <a 
+      href="{google_review_url}" 
+      class="review-btn google"
+      target="_blank"
+    >
+      <div class="btn-icon">
+        <svg><!-- Google Icon --></svg>
+      </div>
+      <div class="btn-content">
+        <strong>Auf Google bewerten</strong>
+        <span>Dauert nur 30 Sekunden</span>
+      </div>
+      <svg class="arrow"><!-- Arrow Right --></svg>
+    </a>
+    
+    <!-- TripAdvisor Review -->
+    <a 
+      href="{tripadvisor_url}" 
+      class="review-btn tripadvisor"
+      target="_blank"
+    >
+      <div class="btn-icon">
+        <svg><!-- TripAdvisor Owl --></svg>
+      </div>
+      <div class="btn-content">
+        <strong>Auf TripAdvisor bewerten</strong>
+        <span>Für Reisende sichtbar</span>
+      </div>
+      <svg class="arrow"><!-- Arrow Right --></svg>
+    </a>
+    
+    <!-- Direktes Feedback (Internal) -->
+    <button 
+      class="review-btn internal"
+      onclick="openFeedbackForm()"
+    >
+      <div class="btn-icon">
+        <svg><!-- Message Icon --></svg>
+      </div>
+      <div class="btn-content">
+        <strong>Direktes Feedback geben</strong>
+        <span>Privat an das Team</span>
+      </div>
+      <svg class="arrow"><!-- Arrow Right --></svg>
+    </button>
+    
+  </div>
+  
+  <!-- Digital Menu -->
+  <div class="menu-section">
+    <h3>📖 Unsere Speisekarte</h3>
+    <button class="btn btn-outline" onclick="openMenu()">
+      <svg><!-- Menu Icon --></svg>
+      Speisekarte ansehen
+    </button>
+  </div>
+  
+  <!-- Tipping (Stripe Integration) -->
+  <div class="tipping-section">
+    <h3>💰 Trinkgeld geben</h3>
+    <p>Bedienung war großartig? Sag Danke! 😊</p>
+    <div class="tip-amounts">
+      <button class="tip-btn" onclick="tip(2)">2 €</button>
+      <button class="tip-btn" onclick="tip(5)">5 €</button>
+      <button class="tip-btn popular" onclick="tip(10)">
+        10 €
+        <span class="badge">Beliebt</span>
+      </button>
+      <button class="tip-btn" onclick="tipCustom()">Eigener Betrag</button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="social-links">
+      <a href="{instagram}">Instagram</a>
+      <a href="{facebook}">Facebook</a>
+      <a href="{website}">Website</a>
+    </div>
+    <p class="powered-by">Powered by Severmore</p>
+  </footer>
+  
+</div>
+```
+
+***
+
+### **Internes Feedback-Formular**
+
+```html
+<!-- Feedback Modal -->
+
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-content feedback-form">
+    
+    <div class="modal-header">
+      <h3>Direktes Feedback</h3>
+      <button class="close-btn" onclick="closeFeedback()">✕</button>
+    </div>
+    
+    <!-- Star Rating -->
+    <div class="star-rating">
+      <p>Wie zufrieden warst du?</p>
+      <div class="stars-input">
+        <button class="star" data-value="1">⭐</button>
+        <button class="star" data-value="2">⭐</button>
+        <button class="star" data-value="3">⭐</button>
+        <button class="star" data-value="4">⭐</button>
+        <button class="star" data-value="5">⭐</button>
+      </div>
+    </div>
+    
+    <!-- Categories -->
+    <div class="feedback-categories">
+      <p>Was hat dir besonders gefallen?</p>
+      <div class="category-chips">
+        <button class="chip">🍽️ Essen</button>
+        <button class="chip">👔 Service</button>
+        <button class="chip">🎨 Ambiente</button>
+        <button class="chip">💰 Preis-Leistung</button>
+        <button class="chip">⚡ Geschwindigkeit</button>
+      </div>
+    </div>
+    
+    <!-- Comment -->
+    <div class="form-group">
+      <label>Dein Kommentar (optional)</label>
+      <textarea 
+        placeholder="Was können wir besser machen?"
+        rows="4"
+      ></textarea>
+    </div>
+    
+    <!-- Email (Optional for Response) -->
+    <div class="form-group">
+      <label>E-Mail (falls wir antworten sollen)</label>
+      <input 
+        type="email" 
+        placeholder="Optional"
+      >
+    </div>
+    
+    <button class="btn btn-primary btn-full" onclick="submitFeedback()">
+      Feedback absenden
+    </button>
+    
+  </div>
+</div>
+```
+
+***
+
+## **📱 TEMPLATE 3: CAMPAIGN MODE - Marketing Landing**
+
+### **Dynamische Landing Page:**
+
+```html
+<!-- URL: nfc.severmore.de/campaign/{company_id} -->
+
+<div class="campaign-container" style="--brand-color: {company_color}">
+  
+  <!-- Hero -->
+  <div class="campaign-hero">
+    <div class="company-logo">
+      <img src="{logo_url}" alt="{company}">
+    </div>
+    <div class="live-badge pulse">
+      🔴 LIVE
+    </div>
+  </div>
+  
+  <!-- Campaign Content (Admin-definiert) -->
+  <div class="campaign-content">
+    
+    <!-- Headline -->
+    <h1 class="campaign-title">
+      {campaign_headline}
+    </h1>
+    
+    <!-- Subheadline -->
+    <p class="campaign-subtitle">
+      {campaign_description}
+    </p>
+    
+    <!-- Visual (Optional) -->
+    <div class="campaign-visual">
+      <img src="{campaign_image}" alt="Angebot">
+    </div>
+    
+    <!-- Discount Code -->
+    <div class="discount-code-card">
+      <span class="label">Dein exklusiver Code:</span>
+      <div class="code-display">
+        <span class="code">{discount_code}</span>
+        <button class="copy-btn" onclick="copyCode()">
+          <svg><!-- Copy Icon --></svg>
+        </button>
+      </div>
+      <span class="validity">Gültig bis: {end_date}</span>
+    </div>
+    
+    <!-- Countdown Timer (Optional) -->
+    <div class="countdown-section" *ngIf="campaign.countdown_active">
+      <p class="countdown-label">⏰ Angebot endet in:</p>
+      <div class="countdown-display">
+        <div class="countdown-unit">
+          <span class="value" id="days">00</span>
+          <span class="label">Tage</span>
+        </div>
+        <span class="separator">:</span>
+        <div class="countdown-unit">
+          <span class="value" id="hours">00</span>
+          <span class="label">Std</span>
+        </div>
+        <span class="separator">:</span>
+        <div class="countdown-unit">
+          <span class="value" id="minutes">00</span>
+          <span class="label">Min</span>
+        </div>
+        <span class="separator">:</span>
+        <div class="countdown-unit">
+          <span class="value" id="seconds">00</span>
+          <span class="label">Sek</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- CTA Buttons -->
+  <div class="campaign-cta">
+    <a 
+      href="{cta_url}" 
+      class="btn btn-primary btn-large"
+      target="_blank"
+    >
+      {cta_text}
+      <svg><!-- Arrow Right --></svg>
+    </a>
+    
+    <!-- Secondary CTA -->
+    <button class="btn btn-outline" onclick="shareOffer()">
+      <svg><!-- Share Icon --></svg>
+      Angebot teilen
+    </button>
+  </div>
+  
+  <!-- Optional: Lead Capture -->
+  <div class="campaign-lead-capture" *ngIf="campaign.capture_leads">
+    <p>💌 Weitere Angebote per E-Mail erhalten?</p>
+    <form class="inline-form" onsubmit="captureEmail(event)">
+      <input 
+        type="email" 
+        placeholder="deine@email.de"
+        required
+      >
+      <button type="submit" class="btn btn-sm">
+        Anmelden
+      </button>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <p class="terms">
+      <a href="{terms_url}">Teilnahmebedingungen</a>
+    </p>
+    <p class="powered-by">Powered by Severmore</p>
+  </footer>
+  
+</div>
+```
+
+***
+
+## **🎨 DESIGN-VARIANTEN (Templates im Dashboard wählbar)**
+
+### **Im Admin Dashboard:**
+
+```html
+<!-- Settings → Profile Template -->
+
+<div class="template-selector">
+  <h3>Wähle dein Profil-Design</h3>
+  
+  <div class="template-grid">
+    
+    <!-- Template Preview Cards -->
+    <div class="template-card" data-template="premium-gradient">
+      <div class="template-preview">
+        <img src="/templates/preview-gradient.png">
+      </div>
+      <div class="template-info">
+        <h4>Premium Gradient</h4>
+        <p>Farbverlauf, modern, auffällig</p>
+        <span class="badge">Beliebt</span>
+      </div>
+      <button class="btn btn-sm">Auswählen</button>
+    </div>
+    
+    <div class="template-card" data-template="minimalist">
+      <div class="template-preview">
+        <img src="/templates/preview-minimal.png">
+      </div>
+      <div class="template-info">
+        <h4>Minimalist Card</h4>
+        <p>Schlicht, elegant, professionell</p>
+      </div>
+      <button class="btn btn-sm">Auswählen</button>
+    </div>
+    
+    <div class="template-card" data-template="event-badge">
+      <div class="template-preview">
+        <img src="/templates/preview-event.png">
+      </div>
+      <div class="template-info">
+        <h4>Event Badge</h4>
+        <p>Für Messen & Events optimiert</p>
+        <span class="badge">Neu</span>
+      </div>
+      <button class="btn btn-sm">Auswählen</button>
+    </div>
+    
+    <!-- Weitere Templates... -->
+    
+  </div>
+  
+  <!-- Live Preview -->
+  <div class="live-preview">
+    <h4>Vorschau</h4>
+    <iframe src="/profile/preview?template={selected}"></iframe>
+    <button class="btn btn-outline">
+      📱 Auf Telefon testen
+    </button>
+  </div>
+  
+</div>
+```
+
+***
+
+## **✅ ZUSAMMENFASSUNG: TEMPLATES & DIREKTNACHRICHTEN**
+
+### **Templates für NFC-Pages:**
+
+✅ **Corporate Mode:**
+- Template A: Premium Gradient (Default)
+- Template B: Minimalist Card
+- Template C: Event Badge (Messe-Optimiert)
+
+✅ **Hospitality Mode:**
+- Review Booster mit Google/TripAdvisor
+- Digitale Speisekarte
+- Trinkgeld-Funktion (Stripe)
+- Internes Feedback-Formular
+
+✅ **Campaign Mode:**
+- Dynamische Landing Page
+- Countdown Timer
+- Discount Codes
+- Lead Capture (optional)
+
+***
+
+### **Direktnachrichten-Funktion:**
+
+✅ **Button:** "Nachricht senden" auf Corporate Profile  
+✅ **Formular:** Name, E-Mail, Telefon, Betreff, Nachricht  
+✅ **Notifications:** Push (Browser), E-Mail, Dashboard Badge  
+✅ **Inbox im Dashboard:** Message-List, Detail View, Quick Reply  
+✅ **Reply-Templates:** Vorgefertigte Antworten für schnelle Reaktion  
+✅ **Analytics:** Nachrichtenstatistiken im Dashboard  
+
+***
+
+**Das war die detaillierte Ausarbeitung aller Templates + Direktnachrichten-Feature!** 🚀  
+Alles klar soweit, Fabian? Falls du noch tiefer in spezifische UI-Komponenten oder Animationen gehen willst, sag Bescheid! 💪
