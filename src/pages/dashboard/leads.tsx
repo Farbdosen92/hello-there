@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Download, RefreshCw } from "lucide-react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/contexts/auth-context";
 
+interface Lead {
+    id: string;
+    lead_name: string;
+    lead_email: string;
+    sentiment: string;
+    created_at: string;
+    users?: { name: string } | null;
+}
+
 export default function LeadsPage() {
     const { user } = useAuth();
-    const [leads, setLeads] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [leads, setLeads] = useState<Lead[]>([]);
 
     useEffect(() => {
         async function fetchLeads() {
@@ -35,20 +37,31 @@ export default function LeadsPage() {
         fetchLeads();
     }, [user]);
 
-    const handleExportCSV = () => {
-        const headers = "Name,Email,Sentiment,Date\n";
-        const rows = leads.map((l) => `${l.lead_name},${l.lead_email},${l.sentiment},${l.created_at}`).join("\n");
-        const blob = new Blob([headers + rows], { type: "text/csv" });
+    function exportToCSV() {
+        if (!leads.length) return;
+
+        const headers = ["Name", "Email", "Stimmung", "Erfasst von", "Datum"];
+        const rows = leads.map((lead) => [
+            lead.lead_name,
+            lead.lead_email,
+            lead.sentiment,
+            (lead.users as any)?.name || "-",
+            new Date(lead.created_at).toLocaleDateString(),
+        ]);
+
+        const csvContent = [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "leads_export.csv";
+        link.download = `leads_${new Date().toISOString().split("T")[0]}.csv`;
         link.click();
-    };
+        URL.revokeObjectURL(url);
+    }
 
-    const handleCRMSync = () => {
-        alert("Synchronisiere mit konfiguriertem CRM (Salesforce/HubSpot)...");
-    };
+    function syncWithCRM() {
+        alert("CRM-Sync kommt bald!");
+    }
 
     if (loading) {
         return (
@@ -66,11 +79,11 @@ export default function LeadsPage() {
                     <p className="text-zinc-500">Erfasste Kontakte aus dem Visitenkarten-Modus.</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button variant="outline" className="border-white/10" onClick={handleExportCSV}>
-                        <Download size={18} className="mr-2" /> CSV Exportieren
+                    <Button variant="outline" className="border-white/10" onClick={exportToCSV}>
+                        <Download size={16} className="mr-2" /> Export CSV
                     </Button>
-                    <Button className="bg-blue-600 hover:bg-blue-500 text-white" onClick={handleCRMSync}>
-                        <RefreshCw size={18} className="mr-2" /> CRM Synchronisieren
+                    <Button variant="outline" className="border-white/10" onClick={syncWithCRM}>
+                        <RefreshCw size={16} className="mr-2" /> CRM Sync
                     </Button>
                 </div>
             </div>
@@ -105,7 +118,7 @@ export default function LeadsPage() {
                                         {lead.sentiment}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-zinc-400">{lead.users?.name || "-"}</TableCell>
+                                <TableCell className="text-zinc-400">{(lead.users as any)?.name || "-"}</TableCell>
                                 <TableCell className="text-zinc-500">{new Date(lead.created_at).toLocaleDateString()}</TableCell>
                             </TableRow>
                         ))}

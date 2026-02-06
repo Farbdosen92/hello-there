@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Plus, Loader2, Edit, Trash, AlertTriangle } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
     Dialog,
     DialogContent,
@@ -12,46 +12,37 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Plus, Edit, Trash, Loader2, AlertTriangle } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/contexts/auth-context";
 
+interface Chip {
+    id: string;
+    uid: string;
+    active_mode: string;
+    last_scan: string | null;
+    assigned_user?: { name: string } | null;
+}
+
 export default function DevicesPage() {
     const { user } = useAuth();
-    const [devices, setDevices] = useState<any[]>([]);
-    const [companies, setCompanies] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [devices, setDevices] = useState<Chip[]>([]);
+    const [companies, setCompanies] = useState<{ id: string; name: string }[]>([]);
     const [addOpen, setAddOpen] = useState(false);
-    const [addLoading, setAddLoading] = useState(false);
+    const [editOpen, setEditOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [selectedChip, setSelectedChip] = useState<Chip | null>(null);
+    const [actionLoading, setActionLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     async function fetchDevices() {
         if (!user) return;
 
-        // Get user's profile to check company
-        const { data: userProfile } = await supabase
-            .from("users")
-            .select("id, company_id")
-            .eq("id", user.id)
-            .single();
+        const { data: userProfile } = await supabase.from("users").select("id, company_id").eq("id", user.id).single();
 
-        // Fetch chips
         let query = supabase.from("chips").select("*, assigned_user:users(name)");
-
         if (userProfile?.company_id) {
             query = query.eq("company_id", userProfile.company_id);
         } else {
@@ -61,7 +52,6 @@ export default function DevicesPage() {
         const { data } = await query;
         setDevices(data || []);
 
-        // Fetch companies
         const { data: companiesData } = await supabase.from("companies").select("id, name");
         setCompanies(companiesData || []);
 
@@ -74,7 +64,7 @@ export default function DevicesPage() {
 
     async function handleAddChip(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        setAddLoading(true);
+        setActionLoading(true);
         setError(null);
 
         const formData = new FormData(e.currentTarget);
@@ -82,7 +72,7 @@ export default function DevicesPage() {
         const company_id = formData.get("company_id") as string;
 
         const { error: insertError } = await supabase.from("chips").insert({
-            uid,
+            uid: uid.replace(/:/g, "").toUpperCase(),
             company_id: company_id || null,
             assigned_user_id: user?.id,
             active_mode: "corporate",
@@ -91,24 +81,78 @@ export default function DevicesPage() {
         if (insertError) {
             setError(insertError.message);
         } else {
+            await fetchDevices();
             setAddOpen(false);
-            fetchDevices();
         }
-        setAddLoading(false);
+        setActionLoading(false);
     }
 
-    async function handleDeleteChip(chipId: string) {
-        const { error } = await supabase.from("chips").delete().eq("id", chipId);
-        if (!error) {
-            fetchDevices();
+    async function handleEditChip(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setActionLoading(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        const password = formData.get("password") as string;
+
+        // Verify password
+        const { error: authError } = await supabase.auth.signInWithPassword({
+            email: user?.email || "",
+            password,
+        });
+
+        if (authError) {
+            setError("Falsches Passwort");
+            setActionLoading(false);
+            return;
         }
+
+        const { error: updateError } = await supabase
+            .from("chips")
+            .update({
+                uid: formData.get("uid") as string,
+                active_mode: formData.get("active_mode") as string,
+            })
+            .eq("id", selectedChip?.id);
+
+        if (updateError) {
+            setError(updateError.message);
+        } else {
+            await fetchDevices();
+            setEditOpen(false);
+        }
+        setActionLoading(false);
     }
 
-    async function handleUpdateMode(chipId: string, newMode: string) {
-        const { error } = await supabase.from("chips").update({ active_mode: newMode }).eq("id", chipId);
-        if (!error) {
-            fetchDevices();
+    async function handleDeleteChip(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setActionLoading(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        const password = formData.get("password") as string;
+
+        // Verify password
+        const { error: authError } = await supabase.auth.signInWithPassword({
+            email: user?.email || "",
+            password,
+        });
+
+        if (authError) {
+            setError("Falsches Passwort");
+            setActionLoading(false);
+            return;
         }
+
+        const { error: deleteError } = await supabase.from("chips").delete().eq("id", selectedChip?.id);
+
+        if (deleteError) {
+            setError(deleteError.message);
+        } else {
+            await fetchDevices();
+            setDeleteOpen(false);
+        }
+        setActionLoading(false);
     }
 
     if (loading) {
@@ -127,6 +171,7 @@ export default function DevicesPage() {
                     <p className="text-zinc-500">Verwalten Sie alle NFC-Chips und deren aktive Modi.</p>
                 </div>
 
+                {/* Add Chip Dialog */}
                 <Dialog open={addOpen} onOpenChange={setAddOpen}>
                     <DialogTrigger asChild>
                         <Button className="bg-white text-black hover:bg-zinc-200">
@@ -140,13 +185,16 @@ export default function DevicesPage() {
                                 Geben Sie die UID des NTAG424 DNA Chips ein.
                             </DialogDescription>
                         </DialogHeader>
-
                         <form onSubmit={handleAddChip} className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="uid">Chip UID (Hex)</Label>
-                                <Input name="uid" placeholder="04:A1:B2:C3:D4:E5:F6" className="bg-black/50 border-white/10 font-mono" required />
+                                <Input
+                                    name="uid"
+                                    placeholder="04:A1:B2:C3:D4:E5:F6"
+                                    className="bg-black/50 border-white/10 font-mono"
+                                    required
+                                />
                             </div>
-
                             <div className="space-y-2">
                                 <Label htmlFor="company_id">Firma zuweisen</Label>
                                 <Select name="company_id">
@@ -155,20 +203,20 @@ export default function DevicesPage() {
                                     </SelectTrigger>
                                     <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
                                         {companies.map((c) => (
-                                            <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                                            <SelectItem key={c.id} value={c.id}>
+                                                {c.name}
+                                            </SelectItem>
                                         ))}
                                     </SelectContent>
                                 </Select>
                             </div>
-
                             {error && <p className="text-red-400 text-sm">{error}</p>}
-
                             <div className="flex justify-end gap-2 pt-2">
-                                <Button type="button" variant="ghost" onClick={() => setAddOpen(false)} disabled={addLoading}>
+                                <Button type="button" variant="ghost" onClick={() => setAddOpen(false)} disabled={actionLoading}>
                                     Abbrechen
                                 </Button>
-                                <Button type="submit" className="bg-blue-600 hover:bg-blue-500" disabled={addLoading}>
-                                    {addLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : "Chip erstellen"}
+                                <Button type="submit" className="bg-blue-600 hover:bg-blue-500" disabled={actionLoading}>
+                                    {actionLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : "Chip erstellen"}
                                 </Button>
                             </div>
                         </form>
@@ -195,44 +243,54 @@ export default function DevicesPage() {
                                 </TableCell>
                                 <TableCell className="font-medium text-white">{device.assigned_user?.name || "-"}</TableCell>
                                 <TableCell>
-                                    <Select value={device.active_mode} onValueChange={(val) => handleUpdateMode(device.id, val)}>
-                                        <SelectTrigger className="w-32 bg-transparent border-white/10">
-                                            <Badge
-                                                variant="outline"
-                                                className={
-                                                    device.active_mode === "corporate"
-                                                        ? "border-blue-500 text-blue-400"
-                                                        : device.active_mode === "hospitality"
-                                                            ? "border-orange-500 text-orange-400"
-                                                            : "border-purple-500 text-purple-400"
-                                                }
-                                            >
-                                                {device.active_mode}
-                                            </Badge>
-                                        </SelectTrigger>
-                                        <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
-                                            <SelectItem value="corporate">Corporate</SelectItem>
-                                            <SelectItem value="hospitality">Hospitality</SelectItem>
-                                            <SelectItem value="event">Event</SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                                    <Badge
+                                        variant="outline"
+                                        className={
+                                            device.active_mode === "corporate"
+                                                ? "border-blue-500 text-blue-400"
+                                                : device.active_mode === "hospitality"
+                                                    ? "border-orange-500 text-orange-400"
+                                                    : "border-purple-500 text-purple-400"
+                                        }
+                                    >
+                                        {device.active_mode}
+                                    </Badge>
                                 </TableCell>
                                 <TableCell className="text-zinc-500">
                                     {device.last_scan ? new Date(device.last_scan).toLocaleDateString() : "Nie"}
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="h-8 w-8 text-red-400 hover:text-red-300"
-                                        onClick={() => handleDeleteChip(device.id)}
-                                    >
-                                        <Trash size={16} />
-                                    </Button>
+                                    <div className="flex gap-1 justify-end">
+                                        {/* Edit Button */}
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8"
+                                            onClick={() => {
+                                                setSelectedChip(device);
+                                                setError(null);
+                                                setEditOpen(true);
+                                            }}
+                                        >
+                                            <Edit size={16} />
+                                        </Button>
+                                        {/* Delete Button */}
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8 text-red-400 hover:text-red-300"
+                                            onClick={() => {
+                                                setSelectedChip(device);
+                                                setError(null);
+                                                setDeleteOpen(true);
+                                            }}
+                                        >
+                                            <Trash size={16} />
+                                        </Button>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         ))}
-
                         {devices.length === 0 && (
                             <TableRow>
                                 <TableCell colSpan={5} className="text-center py-10 text-zinc-500">
@@ -243,6 +301,111 @@ export default function DevicesPage() {
                     </TableBody>
                 </Table>
             </div>
+
+            {/* Edit Dialog */}
+            <Dialog open={editOpen} onOpenChange={setEditOpen}>
+                <DialogContent className="bg-zinc-900 border-zinc-800 text-white">
+                    <DialogHeader>
+                        <DialogTitle>Chip bearbeiten</DialogTitle>
+                        <DialogDescription className="text-zinc-400">
+                            Ändern Sie die Einstellungen für diesen NFC-Chip.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={handleEditChip} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="uid">Chip UID</Label>
+                            <Input
+                                name="uid"
+                                defaultValue={selectedChip?.uid}
+                                className="bg-black/50 border-white/10 font-mono"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="active_mode">Aktiver Modus</Label>
+                            <Select name="active_mode" defaultValue={selectedChip?.active_mode}>
+                                <SelectTrigger className="bg-black/50 border-white/10">
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+                                    <SelectItem value="corporate">Corporate</SelectItem>
+                                    <SelectItem value="hospitality">Hospitality</SelectItem>
+                                    <SelectItem value="event">Event</SelectItem>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <div className="space-y-2 pt-4 border-t border-white/10">
+                            <Label htmlFor="password" className="text-orange-400">
+                                Passwort zur Bestätigung
+                            </Label>
+                            <Input
+                                name="password"
+                                type="password"
+                                placeholder="Ihr Konto-Passwort"
+                                className="bg-black/50 border-orange-500/30"
+                                required
+                            />
+                            <p className="text-xs text-zinc-500">Geben Sie Ihr Passwort ein, um die Änderungen zu bestätigen.</p>
+                        </div>
+                        {error && <p className="text-red-400 text-sm">{error}</p>}
+                        <div className="flex justify-end gap-2 pt-2">
+                            <Button type="button" variant="ghost" onClick={() => setEditOpen(false)} disabled={actionLoading}>
+                                Abbrechen
+                            </Button>
+                            <Button type="submit" className="bg-blue-600 hover:bg-blue-500" disabled={actionLoading}>
+                                {actionLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
+                                Speichern
+                            </Button>
+                        </div>
+                    </form>
+                </DialogContent>
+            </Dialog>
+
+            {/* Delete Dialog */}
+            <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+                <DialogContent className="bg-zinc-900 border-zinc-800 text-white">
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2 text-red-400">
+                            <AlertTriangle size={20} />
+                            Chip löschen
+                        </DialogTitle>
+                        <DialogDescription className="text-zinc-400">
+                            Diese Aktion kann nicht rückgängig gemacht werden. Alle Scan-Daten bleiben erhalten.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg my-4">
+                        <p className="text-sm text-red-300">
+                            Sie sind dabei, den Chip{" "}
+                            <span className="font-mono font-bold">****{selectedChip?.uid?.slice(-4).toUpperCase()}</span> dauerhaft zu
+                            löschen.
+                        </p>
+                    </div>
+                    <form onSubmit={handleDeleteChip} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="password" className="text-red-400">
+                                Passwort zur Bestätigung
+                            </Label>
+                            <Input
+                                name="password"
+                                type="password"
+                                placeholder="Ihr Konto-Passwort"
+                                className="bg-black/50 border-red-500/30"
+                                required
+                            />
+                            <p className="text-xs text-zinc-500">Geben Sie Ihr Passwort ein, um die Löschung zu bestätigen.</p>
+                        </div>
+                        {error && <p className="text-red-400 text-sm">{error}</p>}
+                        <div className="flex justify-end gap-2 pt-2">
+                            <Button type="button" variant="ghost" onClick={() => setDeleteOpen(false)} disabled={actionLoading}>
+                                Abbrechen
+                            </Button>
+                            <Button type="submit" className="bg-red-600 hover:bg-red-500" disabled={actionLoading}>
+                                {actionLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
+                                Endgültig löschen
+                            </Button>
+                        </div>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, Users, TrendingUp, Target } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+    PieChart,
+    Pie,
+    Cell,
+} from "recharts";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/contexts/auth-context";
 
@@ -153,9 +164,21 @@ export default function AnalyticsPage() {
                                         <XAxis dataKey="date" stroke="#666" fontSize={12} tickLine={false} />
                                         <YAxis stroke="#666" fontSize={12} tickLine={false} axisLine={false} />
                                         <Tooltip
-                                            contentStyle={{ backgroundColor: "#18181b", border: "1px solid #333", borderRadius: "8px", color: "#fff" }}
+                                            contentStyle={{
+                                                backgroundColor: "#18181b",
+                                                border: "1px solid #333",
+                                                borderRadius: "8px",
+                                                color: "#fff",
+                                            }}
                                         />
-                                        <Line type="monotone" dataKey="scans" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="scans"
+                                            stroke="#0ea5e9"
+                                            strokeWidth={2}
+                                            dot={false}
+                                            activeDot={{ r: 4 }}
+                                        />
                                     </LineChart>
                                 </ResponsiveContainer>
                             </div>
@@ -174,20 +197,36 @@ export default function AnalyticsPage() {
                             <div className="h-[300px]">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
-                                        <Pie data={deviceData} cx="50%" cy="50%" innerRadius={60} outerRadius={90} paddingAngle={5} dataKey="value">
+                                        <Pie
+                                            data={deviceData}
+                                            cx="50%"
+                                            cy="50%"
+                                            innerRadius={60}
+                                            outerRadius={90}
+                                            paddingAngle={5}
+                                            dataKey="value"
+                                        >
                                             {deviceData.map((_, index) => (
                                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                             ))}
                                         </Pie>
                                         <Tooltip
-                                            contentStyle={{ backgroundColor: "#18181b", border: "1px solid #333", borderRadius: "8px", color: "#fff" }}
+                                            contentStyle={{
+                                                backgroundColor: "#18181b",
+                                                border: "1px solid #333",
+                                                borderRadius: "8px",
+                                                color: "#fff",
+                                            }}
                                         />
                                     </PieChart>
                                 </ResponsiveContainer>
                                 <div className="flex justify-center gap-4 mt-4 flex-wrap">
                                     {deviceData.map((entry, index) => (
                                         <div key={entry.name} className="flex items-center gap-2">
-                                            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
+                                            <div
+                                                className="w-3 h-3 rounded-full"
+                                                style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                                            />
                                             <span className="text-xs text-zinc-400">
                                                 {entry.name} ({entry.value})
                                             </span>

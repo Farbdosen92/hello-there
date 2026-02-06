@@ -1,2 +1,0 @@
-import{m as a,j as e}from"./index-Bzt5sERx.js";function n(){const{companyId:s}=a();return e.jsx("div",{className:"min-h-screen bg-black text-white flex items-center justify-center p-4",children:e.jsxs("div",{className:"text-center max-w-md",children:[e.jsx("h1",{className:"text-3xl font-bold mb-4",children:"Campaign"}),e.jsxs("p",{className:"text-zinc-400",children:["Campaign page for company: ",s]}),e.jsx("p",{className:"text-zinc-600 text-sm mt-4",children:"Coming soon..."})]})})}export{n as default};
-//# sourceMappingURL=_companyId_-BwE9bRWI.js.map
