@@ -17,8 +17,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        // Debug logging
+        console.log("AuthProvider mounted");
+        console.log("Current URL:", window.location.href);
+
         // Get initial session
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabase.auth.getSession().then(({ data: { session }, error }) => {
+            if (error) console.error("Error getting session:", error);
+            if (session) console.log("Initial session found:", session.user.email);
+            else console.log("No initial session found");
+
             setSession(session);
             setUser(session?.user ?? null);
             setLoading(false);
@@ -26,7 +34,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
-            (_event, session) => {
+            (event, session) => {
+                console.log("Auth state change:", event);
+                if (session) console.log("New session user:", session.user.email);
+
                 setSession(session);
                 setUser(session?.user ?? null);
                 setLoading(false);
