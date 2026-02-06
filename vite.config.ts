@@ -7,7 +7,7 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
     // Base path for GitHub Pages - use repo name for project pages
     // Change to "/" if using custom domain or user/org pages
-    base: mode === "production" ? "/hello-there/" : "/",
+    base: mode === "production" ? "/nfc-website/" : "/",
     server: {
         host: "::",
         port: 8080,
