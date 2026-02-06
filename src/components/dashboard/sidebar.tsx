@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import {
     LayoutDashboard,
     Smartphone,
@@ -11,9 +10,11 @@ import {
     BarChart
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
 
 export function AdminSidebar() {
-    const pathname = usePathname();
+    const location = useLocation();
+    const { signOut } = useAuth();
 
     const links = [
         { href: "/dashboard", label: "Übersicht", icon: LayoutDashboard },
@@ -31,11 +32,11 @@ export function AdminSidebar() {
 
             <div className="flex-1 py-6 px-3 space-y-1">
                 {links.map((link) => {
-                    const isActive = pathname === link.href;
+                    const isActive = location.pathname === link.href;
                     return (
                         <Link
                             key={link.href}
-                            href={link.href}
+                            to={link.href}
                             className={cn(
                                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                                 isActive
@@ -51,10 +52,13 @@ export function AdminSidebar() {
             </div>
 
             <div className="p-4 border-t border-white/5">
-                <div className="flex items-center gap-3 px-3 py-2 text-zinc-500 hover:text-red-400 cursor-pointer transition-colors">
+                <button
+                    onClick={() => signOut()}
+                    className="flex items-center gap-3 px-3 py-2 text-zinc-500 hover:text-red-400 cursor-pointer transition-colors w-full"
+                >
                     <LogOut size={18} />
                     <span className="text-sm font-medium">Abmelden</span>
-                </div>
+                </button>
             </div>
         </aside>
     );
